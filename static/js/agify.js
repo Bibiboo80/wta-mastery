@@ -7,7 +7,12 @@
  * @param {*} name
  */
 async function doRequest(name) {
-  // TODO
+    const url = `https://api.agify.io?name=${name}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    const age = data.age;
+    const agifyOutput = document.querySelector('#agifyOutput');
+    agifyOutput.value = age;
 }
 
 /**
