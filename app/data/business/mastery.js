@@ -52,7 +52,8 @@ export function getAutoComplete(query) {
  * @param {*} query
  * @returns object {minNameLength: number, maxNameLength: number, averageNameLength: number}
  */
-export function getStatistics(query) {
+
+/**export function getStatistics(query) {
     let stat = {
         minNameLength: 0, // Die Länge des kürzesten gefundenen Namen
         maxNameLength: 0, // Die Länge des längsten gefundenen Namen
@@ -63,5 +64,22 @@ export function getStatistics(query) {
     // 1. Zum Einlesen der Namen wird dieselbe Funktion wie oben benötigt.
     // 2. Zum Suchen von passenden Namen, wird ähnlicher Code wie in getAutoComplete benötigt.
 
+
     return stat;
 };
+*/
+
+
+export function getStatistics(query) {
+    const names = fs.readFileSync(nameFile, 'utf-8').split(/\r?\n/);
+
+    const filteredNames = names.filter(name => name.startsWith(query));
+
+    const stat = {
+        minNameLength: filteredNames.reduce((min, name) => Math.min(min, name.length), Infinity),
+        maxNameLength: filteredNames.reduce((max, name) => Math.max(max, name.length), 0),
+        averageNameLength: filteredNames.reduce((sum, name) => sum + name.length, 0) / filteredNames.length,
+    };
+
+    return stat;
+}
