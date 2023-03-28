@@ -15,10 +15,22 @@ export function getRandomName () {
   // 1.) Datei einlesen (mit "utf-8" encoding)
   // 2.) Text in Array umwandeln (Zeilenumbrüche werden entweder als "\n" oder als "\r\n" erkannt)
   // 3.) Zufälliges Arrayelement auslesen und zurückgeben
+  const names = fs.readFileSync(nameFile, 'utf-8').split(/\r?\n/);
+    const randomIndex = Math.floor(Math.random() * names.length);
+    return names[randomIndex];
   let randomName = '';
 
   return randomName;
 };
+
+
+
+
+
+
+
+
+
 
 /**
  * getAutoComplette
