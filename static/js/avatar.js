@@ -7,7 +7,10 @@
  * @param {*} name 
  */
 async function getAvatar(name) {
-  // TODO
+  //const url = `https://avatars.oxro.io/avatar?name=${name}`;
+  const url = 'https://avatar.oxro.io/avatar.svg?name=Eddie&background=f39c12&length=1';
+  const avatarImage = document.querySelector('#avatarImage');
+  avatarImage.src = url;
 }
 
 /**
